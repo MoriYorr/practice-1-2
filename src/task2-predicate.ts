@@ -21,8 +21,6 @@ export function isTransaction(data: unknown): data is Transaction {
         return true
       }
   }
-
-
   return false
 }
 
