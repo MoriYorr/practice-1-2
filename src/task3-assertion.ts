@@ -9,6 +9,11 @@ export type AppConfig = {
 // Используйте синтаксис: asserts data is AppConfig
 export function assertValidConfig(data: unknown): asserts data is AppConfig {
   // Напишите код здесь
+  if (data == null || typeof data !== "object"
+    || !("apiUrl" in data) || !("timeout" in data)
+    || typeof data.apiUrl !== "string" ||
+    typeof data.timeout !== "number"
+  ) throw new Error("Invalid config")
 }
 
 // Функция инициализации.
@@ -16,4 +21,6 @@ export function assertValidConfig(data: unknown): asserts data is AppConfig {
 // Если проверка прошла - вернуть "API: <apiUrl>, Timeout: <timeout>"
 export function initApp(config: unknown): string {
   // Напишите код здесь
+  assertValidConfig(config)
+  return "API: " + config.apiUrl + ", Timeout: " + config.timeout
 }
